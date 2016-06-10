@@ -841,16 +841,18 @@ node* red_black_tree::search_next(int id){
         do{
             if(t->ID>id&&t->l)      // Traverse iteratively in left subtree if t->ID is greater than id
                 t=t->l;
-            else if(t->ID>id)       // Break if rightmost child reached
+            else if(t->ID>=id)       // Break if rightmost child reached
                 break;
             else if(t->ID<id&&t->r) // Traverse iteratively in right subtree if t->ID is less than id
                 t=t->r;
-            else if(t->ID<id)       // Break if leftmost child reached
+            else if(t->ID<=id)       // Break if leftmost child reached
                 break;
         }while(t);
     }
     if(t&&t->ID<id)                 // If current t'ID is less than id, we just call next of t and return it
         t=next(t);
+    if(t->ID==id)
+        t=NULL;
     return t;
 };
 
@@ -863,16 +865,18 @@ node* red_black_tree::search_previous(int id){
         do{
             if(t->ID>id&&t->l)      // Traverse iteratively in left subtree if t->ID is greater than id
                 t=t->l;
-            else if(t->ID>id)       // Break if rightmost child reached
+            else if(t->ID>=id)       // Break if rightmost child reached
                 break;
             else if(t->ID<id&&t->r) // Traverse iteratively in right subtree if t->ID is less than id
                 t=t->r;
-            else if(t->ID<id)       // Break if leftmost child reached
+            else if(t->ID<=id)       // Break if leftmost child reached
                 break;
         }while(t);
     }
     if(t&&t->ID>id)                 // If current t'ID is more than id, we just call prev of t and return it
         t=previous(t);
+    if(t->ID==id)
+        t=NULL;
     return t;
 };
 
